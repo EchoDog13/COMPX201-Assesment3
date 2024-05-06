@@ -5,11 +5,18 @@ class StackTest {
 
    private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream () ;
+
+    /**
+     * Before each test is run, sets output print stream to outputStreamCaptor to capture output. This is used to test
+     */
     @BeforeEach
     public void setOut (){
         System.setOut (new PrintStream (outputStreamCaptor));
     }
 
+    /**
+     * resets the output of the print stream
+     */
     @AfterEach
     public void restoreOut () {
         System.setOut(standardOut);}
@@ -107,11 +114,27 @@ class StackTest {
      @DisplayName("Pop stack item")
      void popStackItem(){
          Stack stackTest = new Stack();
-        stackTest.push("A");
         stackTest.push("B");
 
         Assertions.assertEquals("B", stackTest.pop());
      }
+
+
+     //Checks that the next item in the list is the correct item
+     @Test
+     @DisplayName("Check Head goes to next item")
+     void checkHeadGoesToNextItem(){
+        Stack stackTest = new Stack();
+        stackTest.push("A");
+        stackTest.push("B");
+        stackTest.push("C");
+
+        stackTest.pop();
+        Assertions.assertEquals("B", stackTest.pop());
+     }
+
+
+
 //Does the stack start as empty
 @Test
     @DisplayName("Test Stack creation")
@@ -119,5 +142,16 @@ class StackTest {
         Stack stackTest = new Stack();
         Assertions.assertNull(stackTest.head);
 }
+
+@Test
+    @DisplayName("Pop Item Makes Head Null")
+    void popMakesHeadNull(){
+        Stack stackTest =  new Stack();
+        stackTest.push("a");
+
+    stackTest.pop();
+        Assertions.assertNull(stackTest.head);
+}
+
 
 }
