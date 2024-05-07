@@ -20,7 +20,6 @@ public class Stack {
         //Creates new node if head is null
         if (head == null) {
             head = newNode;
-            return;
             //Adds to next front of stack if it contains items
         } else {
             newNode.next = head;
@@ -67,12 +66,8 @@ public class Stack {
      */
         public boolean isEmpty(){
             //if head is null, list is empty, return true
-            if (head == null) {
-                return true;
-// else, list contains items, return false
-            }else {
-                return false;
-            }
+            // else, list contains items, return false
+            return head == null;
         }
 
     /**
