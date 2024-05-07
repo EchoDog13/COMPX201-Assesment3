@@ -1,12 +1,11 @@
 /**
- * Implementation of a stack (Last In, First Out) providing push, pop
+ * Implementation of a stack (Last In, First Out) providing push, pop, peek, and isEmpty functionality.
  */
 public class Stack {
 //Starting node in stack
     Node head;
-
-
     public Stack() {
+        //points head to null node
         head = null;
     }
 
@@ -82,7 +81,6 @@ public class Stack {
                 System.out.print(curr.value + "->");
                 //Moves to next node
                 curr = curr.next;
-    
             }
             System.out.println();
         }

@@ -67,7 +67,6 @@ class StackTest {
     /**
      * Tests that items can be added to stack containing item, then peeks item to check item adds in the correct order
      */
-
     @Test
     @DisplayName("Push to stack containing items")
     void pushStackContainingItems() {
@@ -75,9 +74,8 @@ class StackTest {
 
         stackTest.push("1");
         stackTest.push("2");
+
         Assertions.assertEquals("2", stackTest.pop());
-
-
     }
 
     /**
@@ -92,7 +90,7 @@ class StackTest {
     }
 
     /**
-     * Tests that non empty stack return false
+     * Tests that a non-empty stack return false
      */
     @Test
     @DisplayName("Is empty stack containing an item")
@@ -101,8 +99,6 @@ class StackTest {
         stackTest.push("Item");
         Assertions.assertFalse(stackTest.isEmpty());
     }
-
-    //Dump Tests
 
     /**
      * Tests that empty stack returns blank output
@@ -118,7 +114,6 @@ class StackTest {
     /**
      * Tests that the dump function correctly exports item in stack in the correct order
      */
-
     @Test
     @DisplayName("Dump Stack with item")
     void dumpStackWithItem() {
@@ -176,5 +171,4 @@ class StackTest {
         stackTest.pop();
         Assertions.assertNull(stackTest.head);
     }
-
 }
