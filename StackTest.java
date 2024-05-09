@@ -1,8 +1,9 @@
+//import statements
 import org.junit.jupiter.api.*;
 import java.io.*;
 
 /**
- *
+ *class which contains the jUnit tests to test the functionality of the stack methods of push, pop, peek, length, dump and isEmtpy.
  */
 class StackTest {
 
@@ -12,7 +13,7 @@ class StackTest {
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
     /**
-     * Before each test is run, sets output print stream to outputStreamCaptor to capture output. This is used to test
+     * Before each test is run, sets output print stream to outputStreamCaptor to capture output. This is used to test the dump method
      */
     @BeforeEach
     public void setOut() {
@@ -33,9 +34,7 @@ class StackTest {
     @Test
     @DisplayName("Peek shows correct item")
     public void peekShowsCorrectItem() {
-
         Stack stackTest = new Stack();
-
         stackTest.push("Hello");
         stackTest.push("World");
         Assertions.assertEquals("World", stackTest.peek());
@@ -71,11 +70,33 @@ class StackTest {
     @DisplayName("Push to stack containing items")
     void pushStackContainingItems() {
         Stack stackTest = new Stack();
-
         stackTest.push("1");
         stackTest.push("2");
-
         Assertions.assertEquals("2", stackTest.pop());
+    }
+
+    /**
+     * Tests adding special character items to an empty stack
+     */
+    @Test
+    @DisplayName("Push unexpected input of special characters to empty stack")
+    void pushSpecialCharactersToEmptyStack(){
+        Stack stackTest = new Stack();
+        stackTest.push("*3Hello  &*%*   ./'");
+        Assertions.assertEquals("*3Hello  &*%*   ./'", stackTest.peek());
+    }
+
+    /**
+     * Tests adding special characters string to stack containing items
+     */
+    @Test
+    @DisplayName("Push unexecpted input of special characters to stack containing item")
+    void pushSpecialCharactersToStack(){
+        Stack stackTest = new Stack();
+        stackTest.push("Hello");
+        stackTest.push("World");
+        stackTest.push("*^sdfhsj^*%(*&kdhfKYGK9w8y32&*^%*)(%");
+        Assertions.assertEquals("*^sdfhsj^*%(*&kdhfKYGK9w8y32&*^%*)(%", stackTest.peek());
     }
 
     /**
@@ -85,7 +106,6 @@ class StackTest {
     @DisplayName("Is empty on empty Stack")
     void isEmptyOnEmptyStack() {
         Stack stackTest = new Stack();
-
         Assertions.assertTrue(stackTest.isEmpty());
     }
 
@@ -115,8 +135,8 @@ class StackTest {
      * Tests that the dump function correctly exports item in stack in the correct order
      */
     @Test
-    @DisplayName("Dump Stack with item")
-    void dumpStackWithItem() {
+    @DisplayName("Dump Stack with items")
+    void dumpStackWithItems() {
         Stack stackTest = new Stack();
         stackTest.push("World");
         stackTest.push("Hello");
@@ -135,22 +155,50 @@ class StackTest {
     }
 
     /**
-     * Tests that when performing a pop on a stack with multiple items, the correct item is popped
+     * Test the dump function on a stack with special characters contained in some nodes
      */
     @Test
-    @DisplayName("Check Head goes to next item")
+    @DisplayName("Dump stack with special characters")
+    void dumpSpecialCharactersWithEmptyItem(){
+        Stack stackTest = new Stack();
+        stackTest.push("Hello");
+        stackTest.push("*&%(alsdhig123123(**(");
+        stackTest.push("Uniform");
+        stackTest.dump();
+        Assertions.assertEquals("Uniform->*&%(alsdhig123123(**(->Hello->", outputStreamCaptor.toString().trim());
+
+    }
+
+    /**
+     * Tests that when performing a pop on a stack with multiple items, the correct item is popped, and that it is popped
+     */
+    @Test
+    @DisplayName("Pop multiple item stack")
     void checkHeadGoesToNextItem() {
         Stack stackTest = new Stack();
         stackTest.push("A");
         stackTest.push("B");
         stackTest.push("C");
-
         stackTest.pop();
         Assertions.assertEquals("B", stackTest.pop());
     }
 
     /**
-     * Tests that head points to nul when an instance of a stack is initialised
+     * Pop item with special characters
+     */
+    @Test
+    @DisplayName("Pop item containing special characters")
+    void popSpecialCharacters(){
+        Stack stackTest = new Stack();
+        stackTest.push("Cars");
+        stackTest.push("Airplanes");
+        stackTest.push("O*&%O&ad.kjhg");
+
+        Assertions.assertEquals("O*&%O&ad.kjhg", stackTest.pop());
+    }
+
+    /**
+     * Tests that head points to null when an instance of a stack is initialised
      */
     @Test
     @DisplayName("Test Stack creation")
@@ -163,12 +211,29 @@ class StackTest {
      * Tests that popping the only item in a stack returns head to being null
      */
     @Test
-    @DisplayName("Pop Item Makes Head Null")
+    @DisplayName("Pop single item makes head null")
     void popMakesHeadNull() {
         Stack stackTest = new Stack();
         stackTest.push("a");
 
         stackTest.pop();
         Assertions.assertNull(stackTest.head);
+    }
+
+    @Test
+    @DisplayName("Get length of list with items")
+    void lengthWithItems(){
+        Stack stackTest = new Stack();
+        stackTest.push("1st");
+        stackTest.push("2nd");
+        stackTest.push("3rd");
+        Assertions.assertEquals(3, stackTest.length());
+    }
+
+    @Test
+    @DisplayName("Get Length on emtpy stack")
+    void lengthOfEmptyStack(){
+        Stack stackTest = new Stack();
+        Assertions.assertEquals(0, stackTest.length());
     }
 }

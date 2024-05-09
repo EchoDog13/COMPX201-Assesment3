@@ -1,6 +1,6 @@
 
 /**
- * Class to create nodes which are used in the implementation of a stack
+ * Class to create nodes which are used in the implementation of a stack of strings in a dynamic linked list structure
  * Each Node contains a value (string), and a pointer to the next node in the stack
  */public class Node {
      //value of the node

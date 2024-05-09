@@ -19,8 +19,8 @@ public class Stack {
         //Creates new node if head is null
         if (head == null) {
             head = newNode;
-            //Adds to next front of stack if it contains items
         } else {
+            //Adds to next front of stack if it contains items
             newNode.next = head;
             head = newNode;
         }
@@ -35,12 +35,11 @@ public class Stack {
         if (head == null){
             return null;
         }else{
-
             //Stores string value of popped item
             String poppedItem;
             //Gets value from item to be popped
             poppedItem = head.value;
-             // Moves head's pointer to next item, removing the top item from hte list
+             // Moves head's pointer to next item, thus removing the top item from the stack
             head = head.next;
             return poppedItem; 
         }
@@ -53,19 +52,31 @@ public class Stack {
     public String peek(){
         //if head is null, stack is empty, so no items to return, thus return null
         if (head == null){
-            return null;}
+            return null;
+        }
         //returns value of the first item in the list
-        else{ return head.value;
+        else{
+            return head.value;
             }
         }
 
+        public int length(){
+            int counter = 0;
+            Node curr = head;
+            while (curr != null){
+                curr=curr.next;
+                counter++;
+            }
+            return counter;
+        }
+
     /**
-     * Method to check if list contains items
-     * @return boolean, true if list contains no items, false if list contains items
+     * Method to check if stack contains any items
+     * @return boolean, true if stack contains no items, false if stack contains items
      */
         public boolean isEmpty(){
-            //if head is null, list is empty, return true
-            // else, list contains items, return false
+            //if head is null, stack is empty, return true
+            // else, stack contains items, return false
             return head == null;
         }
 
@@ -75,7 +86,7 @@ public class Stack {
      */
         public void dump(){
             Node curr = head;
-            //loops till end of list
+            //loops till bottom of stack
             while (curr != null) {
                 //prints current node
                 System.out.print(curr.value + "->");
