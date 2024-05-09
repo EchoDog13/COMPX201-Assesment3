@@ -59,6 +59,17 @@ public class Stack {
             }
         }
 
+        public int length(){
+            int counter = 0;
+            Node curr = head;
+            while (curr != null){
+                curr=curr.next;
+                counter++;
+
+            }
+            return counter;
+        }
+
     /**
      * Method to check if list contains items
      * @return boolean, true if list contains no items, false if list contains items

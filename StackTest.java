@@ -74,8 +74,31 @@ class StackTest {
 
         stackTest.push("1");
         stackTest.push("2");
-
         Assertions.assertEquals("2", stackTest.pop());
+    }
+
+    /**
+     * Tests adding special character items to an empty stack
+     */
+    @Test
+    @DisplayName("Push unexpected input of special characters to empty stack")
+    void pushSpecialCharactersToEmptyStack(){
+        Stack stackTest = new Stack();
+        stackTest.push("*3Hello  &*%*   ./'");
+        Assertions.assertEquals("*3Hello  &*%*   ./'", stackTest.peek());
+    }
+
+    /**
+     * Tests adding special characters string to stack containing items
+     */
+    @Test
+    @DisplayName("Push unexecpted input of special characters to stack containing item")
+    void pushSpecialCharactersToStack(){
+        Stack stackTest = new Stack();
+        stackTest.push("Hello");
+        stackTest.push("World");
+        stackTest.push("*^sdfhsj^*%(*&kdhfKYGK9w8y32&*^%*)(%");
+        Assertions.assertEquals("*^sdfhsj^*%(*&kdhfKYGK9w8y32&*^%*)(%", stackTest.peek());
     }
 
     /**
@@ -115,8 +138,8 @@ class StackTest {
      * Tests that the dump function correctly exports item in stack in the correct order
      */
     @Test
-    @DisplayName("Dump Stack with item")
-    void dumpStackWithItem() {
+    @DisplayName("Dump Stack with items")
+    void dumpStackWithItems() {
         Stack stackTest = new Stack();
         stackTest.push("World");
         stackTest.push("Hello");
@@ -134,11 +157,24 @@ class StackTest {
         Assertions.assertNull(stackTest.pop());
     }
 
+    @Test
+    @DisplayName("Dump stack with special characters")
+    void dumpSpecialCharactersWithEmptyItem(){
+        Stack stackTest = new Stack();
+        stackTest.push("Hello");
+        stackTest.push("*&%(alsdhig123123(**(");
+        stackTest.push("Uniform");
+        stackTest.dump();
+        Assertions.assertEquals("Uniform->*&%(alsdhig123123(**(->Hello->", outputStreamCaptor.toString().trim());
+
+    }
+
     /**
      * Tests that when performing a pop on a stack with multiple items, the correct item is popped
+     * IMPROVE THIS
      */
     @Test
-    @DisplayName("Check Head goes to next item")
+    @DisplayName("Pop multiple item stack")
     void checkHeadGoesToNextItem() {
         Stack stackTest = new Stack();
         stackTest.push("A");
@@ -150,7 +186,22 @@ class StackTest {
     }
 
     /**
-     * Tests that head points to nul when an instance of a stack is initialised
+     * Pop item with special characters
+     */
+    @Test
+    @DisplayName("Pop item containing special characters")
+    void popSpecialCharacters(){
+        Stack stackTest = new Stack();
+        stackTest.push("Cars");
+        stackTest.push("Airplanes");
+        stackTest.push("O*&%O&ad.kjhg");
+
+        Assertions.assertEquals("O*&%O&ad.kjhg", stackTest.pop());
+    }
+
+
+    /**
+     * Tests that head points to null when an instance of a stack is initialised
      */
     @Test
     @DisplayName("Test Stack creation")
@@ -163,7 +214,7 @@ class StackTest {
      * Tests that popping the only item in a stack returns head to being null
      */
     @Test
-    @DisplayName("Pop Item Makes Head Null")
+    @DisplayName("Pop single item makes head null")
     void popMakesHeadNull() {
         Stack stackTest = new Stack();
         stackTest.push("a");

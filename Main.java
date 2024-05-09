@@ -2,11 +2,13 @@ public class Main {
      public static void main(String[] args) {
      Stack newStack = new Stack();
 
-     newStack.push("a");
-          newStack.dump();
-     newStack.pop();
-     newStack.pop();
-          newStack.dump();
+          Stack stackTest = new Stack();
+          stackTest.push("Hello");
+          stackTest.push("*&%(alsdhig123123(**(");
+          stackTest.push("Uniform");
+          System.out.println(stackTest.length());
+
+          stackTest.dump();
 
 
 
