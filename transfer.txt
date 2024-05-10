@@ -1,0 +1,4 @@
+javac -cp "junit-platform-console-standalone-1.8.2.jar" *.java
+To Run:
+java -jar junit-platform-console-standalone-1.8.2.jar -cp "." -c StackTest
+
